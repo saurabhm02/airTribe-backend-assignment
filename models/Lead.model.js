@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const leadSchema = new mongoose.Schema({
+    course: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Course",
+        required: true,
+    },
     name: {
         type: String,
         required: true,
@@ -11,14 +16,26 @@ const leadSchema = new mongoose.Schema({
         required: true,
         lowercase: true,
     },
-    contactNumber: {
-        type: Number,
+    phone: {
+        type: String, // Change type to string
+        required: true,
+    },
+    linkedInProfile: {
+        type: String,
         required: true,
     },
     status: {
         type: String,
         enum: ["Pending", "Waitlisted", "Accepted", "Rejected"],
+        default: "Pending",
     },
+    comments: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Comment",
+        }
+    ]
+
 });
 
 module.exports = mongoose.model("Lead", leadSchema);

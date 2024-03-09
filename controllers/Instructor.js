@@ -7,7 +7,7 @@ require("dotenv").config();
 const jwt_Secret = process.env.JWT_SECRET;
 
 
-exports.signUp = async(req, res) => {
+exports.signUpInstructor = async(req, res) => {
     try{
         const { firstName, lastName, email, password, cPassword } = req.body;
 
@@ -58,7 +58,7 @@ exports.signUp = async(req, res) => {
 };
 
 
-exports.login = async(req, res) => {
+exports.loginInstructor = async(req, res) => {
     try{
         const { email, password } = req.body;
 
