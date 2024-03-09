@@ -17,7 +17,7 @@ const leadSchema = new mongoose.Schema({
         lowercase: true,
     },
     phone: {
-        type: String, // Change type to string
+        type: String,
         required: true,
     },
     linkedInProfile: {

@@ -8,6 +8,7 @@ const jwt_Secret = process.env.JWT_SECRET;
 
 
 exports.signUpInstructor = async(req, res) => {
+    
     try{
         const { firstName, lastName, email, password, cPassword } = req.body;
 
