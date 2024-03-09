@@ -21,7 +21,7 @@ const courseSchema = new mongoose.Schema({
         trim: true,
     },
     price: {
-        type: Number,
+        type: String,
         required: true,
     },
     max_seats: {
