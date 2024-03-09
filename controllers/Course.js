@@ -12,6 +12,8 @@ exports.createCourse = async(req, res) => {
         }
 
         const instructorId = req.instructor.id;
+        console.log("instructor id: ", instructorId);
+
         if (!instructorId) {
             return res.status(404).json({
                 success: false,
@@ -19,30 +21,29 @@ exports.createCourse = async(req, res) => {
             });
         }
 
-        const instructorDetails = await Instructor.findById(instructorId);
+        // const instructorDetails = await Instructor.findById({instructorId});
 
-        console.log("instructorDetails", instructorDetails);
+        // console.log("instructorDetails", instructorDetails);
 
-        if(!instructorDetails){
-            return res.status(404).json({
-                success: false, 
-                message: "Instructor Details not found",
-            });
-        }
+        // if(!instructorDetails){
+        //     return res.status(404).json({
+        //         success: false, 
+        //         message: "Instructor Details not found",
+        //     });
+        // }
 
         const newCourse = await Course.create({
             courseName,
             courseDescription,
             whatYouWillLearn,
             price,
-            instructor: instructorDetails._id,
+            instructor: instructorId,
             max_seats,
             start_date,
         });
 
-        await Instructor.findByIdAndUpdate({
-                _id: instructorDetails._id
-            }, {
+        await Instructor.findByIdAndUpdate(
+            instructorId , {
                 $push: {
                     courses: newCourse._id,
                 }

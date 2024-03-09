@@ -1,4 +1,3 @@
-const { JsonWebTokenError } = require("jsonwebtoken");
 const Instructor = require("../models/Instructor.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -12,7 +11,7 @@ exports.signUpInstructor = async(req, res) => {
     try{
         const { firstName, lastName, email, password, cPassword } = req.body;
 
-        if(!firstName || !lastName || !email || !password || !cPassword){
+        if (!firstName || !lastName || !email || !password || !cPassword) {
             return res.status(403).json({
                 success: false,
                 message: "All fields are required "
@@ -41,6 +40,7 @@ exports.signUpInstructor = async(req, res) => {
             lastName,
             email,
             password: hashPassword,
+            cPassword
         });
 
         res.status(200).json({
@@ -50,7 +50,7 @@ exports.signUpInstructor = async(req, res) => {
         });
     }
     catch(error){
-        console.log(error);
+        console.log("error in sign up: ",error);
         res.status(500).json({
             success: false,
             message: "Instructor cannot be registered!, Please try again",
@@ -80,7 +80,7 @@ exports.loginInstructor = async(req, res) => {
 
         if(await bcrypt.compare(password, instructor.password)){
             const payload = {
-                _id: instructor._id,
+                id: instructor._id,
                 email: instructor.email,
             }
             const token = jwt.sign(payload, jwt_Secret, {

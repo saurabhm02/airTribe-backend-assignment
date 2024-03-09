@@ -7,7 +7,7 @@ exports.createComment = async (req, res) => {
         const { leadId } = req.params;
         const { instructorId, commentText } = req.body;
 
-        if (!instructorId || !commentText) {
+        if (!leadId || !instructorId || !commentText) {
             return res.status(400).json({
                 success: false,
                 message: "Please provide all required fields"

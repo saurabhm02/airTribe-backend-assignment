@@ -1,5 +1,3 @@
-module.exports = mongoose.model("Lead", leadSchema);
-
 const Lead = require("../models/Lead.model");
 
 exports.registerLead = async(req, res) => {
@@ -13,7 +11,7 @@ exports.registerLead = async(req, res) => {
             });
         }
 
-        const lead = Lead.create({
+        const createdLead = await Lead.create({
             course: courseId,
             name,
             email,
@@ -24,7 +22,7 @@ exports.registerLead = async(req, res) => {
         return res.status(200).json({
             success: true,
             message: "Lead created successfully.",
-            lead,
+            data: createdLead,
         });
     }
     catch(error){
@@ -39,7 +37,8 @@ exports.registerLead = async(req, res) => {
 
 exports.updateLeadStatus = async(req, res) => {
     try{
-        const { leadId, status } = req.body;
+        const { status } = req.body;
+        const { leadId } = req.params;
         
         if(!leadId ||!status){
             return res.status(400).json({
