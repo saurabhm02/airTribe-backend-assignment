@@ -1,12 +1,11 @@
 const express = require("express");
-const router = require("router");
+const router = express.Router();
 
 const { signUpInstructor, loginInstructor } = require("../controllers/Instructor");
 const { createCourse, updateCourse, getAllCourses } = require("../controllers/Course");
 const { registerLead, updateLeadStatus, searchLeads } = require("../controllers/Lead");
 const { createComment } = require("../controllers/Comment");
 
-// instructor  Routes
 
 // Instructor Routes
 router.post('/instructor/signup', signUpInstructor);
