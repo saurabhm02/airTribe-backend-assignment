@@ -1,24 +1,34 @@
 const mongoose = require("mongoose");
 
 const courseSchema = new mongoose.Schema({
-    title : {
+    courseName: {
         type: String,
         required: true,
+    },
+    courseDescription: {
+        type: String,
+        required: true,
+        trim: true,
     },
     instructor: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Instructor",
         required: true,
     },
-    description: {
+    whatYouWillLearn: {
         type: String,
         required: true,
+        trim: true,
     },
-    masSeats: {
+    price: {
         type: Number,
         required: true,
     },
-    startDate: {
+    max_seats: {
+        type: Number,
+        required: true,
+    },
+    start_date: {
         type: Date,
         required: true,
     },
